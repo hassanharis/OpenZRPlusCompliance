@@ -1,0 +1,17 @@
+# Generated extraction artifacts — keep out of git until the dataset is frozen
+output/
+
+# Per-pass LLM cache (used to resume interrupted runs)
+.extraction_cache/
+
+# Source spec PDF (download separately; not redistributed)
+openzrplus_rev3p0_final2.pdf
+*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.env
