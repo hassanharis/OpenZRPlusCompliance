@@ -26,6 +26,8 @@ from datetime import date
 import anthropic
 import pdfplumber
 import jsonschema
+import pymupdf4llm
+
 
 # ---------------------------------------------------------------------------
 # Config
@@ -96,6 +98,15 @@ def extract_pdf_pages(pdf_path: Path, start_page: int, end_page: int) -> str:
 
     return "\n".join(text_parts)
 
+    
+def extract_pdf_pages_with_pymupdf4llm(pdf_path: Path) -> str:
+    return pymupdf4llm.to_markdown(str(pdf_path))
+
+    
+def get_headings_from_md(markdown_text):
+    # Re.M (re.MULTILINE) forces ^ to match the start of each line
+    matches = re.findall(r'^(#{1,6})\s+(.+)$', markdown_text, re.M)
+    return [(len(level), text) for level, text in matches]
 
 # ---------------------------------------------------------------------------
 # Cache helpers (allows resuming interrupted runs)
